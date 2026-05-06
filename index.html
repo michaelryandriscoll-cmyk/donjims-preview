@@ -84,6 +84,7 @@ footer ul li a:hover{color:var(--yellow)}
 .fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:14px;text-align:center;font-size:12px;color:#3344aa;max-width:960px;margin:0 auto}
 @media(max-width:700px){nav .nav-links{display:none}.hero{padding:40px 16px 36px}section{padding:36px 16px}.ctabar{padding:30px 16px}footer{padding:28px 16px 14px}}
 </style>
+  <script id="portal-scripts" data-api-key="9bdd752155224312b913f3c84b6ab025" data-google-analytics-enabled="true" data-loading-color="000000" src="https://portal.autoops.com/portal-scripts.js"></script>
 </head>
 <body>
 
@@ -124,7 +125,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 7:00am – 6:00pm &nbsp;|&nbsp; Sat: 8:00am – 4:00pm</div></div>
         <div class="lrow"><div class="dot"></div><div>Full-service gas &amp; complete auto repair</div></div>
         <div class="lacts">
-          <a class="bbk" href="YOUR_BOOKING_LINK_HERE" target="_blank">Book Appointment ›</a>
+          <a class="bbk" href="#" class="autoops-book" target="_blank">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168233004">&#128222; (716) 823-3004</a>
         </div>
       </div>
@@ -138,7 +139,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 7:00am – 6:00pm &nbsp;|&nbsp; Sat: 8:00am – 4:00pm</div></div>
         <div class="lrow"><div class="dot"></div><div>Full-service gas &amp; complete auto repair</div></div>
         <div class="lacts">
-          <a class="bbk" href="YOUR_BOOKING_LINK_HERE" target="_blank">Book Appointment ›</a>
+          <a class="bbk" href="#" class="autoops-book" target="_blank">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168233004">&#128222; (716) 823-3004</a>
         </div>
       </div>
@@ -196,7 +197,7 @@ footer ul li a:hover{color:var(--yellow)}
         <li>570 Seneca St, West Seneca NY 14224</li>
         <li>Mon–Fri 7am–6pm &nbsp;·&nbsp; Sat 8am–4pm</li>
         <li><a href="tel:+17168233004">(716) 823-3004</a></li>
-        <li><a href="YOUR_BOOKING_LINK_HERE">Book Online</a></li>
+        <li><a href="#" class="autoops-book">Book Online</a></li>
       </ul>
     </div>
     <div>
@@ -205,7 +206,7 @@ footer ul li a:hover{color:var(--yellow)}
         <li>65 Center Rd, Buffalo NY 14224</li>
         <li>Mon–Fri 7am–6pm &nbsp;·&nbsp; Sat 8am–4pm</li>
         <li><a href="tel:+17168233004">(716) 823-3004</a></li>
-        <li><a href="YOUR_BOOKING_LINK_HERE">Book Online</a></li>
+        <li><a href="#" class="autoops-book">Book Online</a></li>
       </ul>
     </div>
     <div>
@@ -223,5 +224,22 @@ footer ul li a:hover{color:var(--yellow)}
   <div class="fbot">&copy; 2025 Don &amp; Jim's Auto Service Center &nbsp;&middot;&nbsp; West Seneca &amp; Buffalo, NY &nbsp;&middot;&nbsp; All rights reserved</div>
 </footer>
 
+  <script>
+    function attachAOCode() {
+      const apptBtns = document.querySelectorAll("a.autoops-book");
+      for (const apptBtn of apptBtns) {
+        apptBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          AutoOps.show();
+        });
+      }
+    }
+    // Wait for AutoOps to load then attach
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", attachAOCode);
+    } else {
+      attachAOCode();
+    }
+  </script>
 </body>
 </html>
