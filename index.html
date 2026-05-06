@@ -94,7 +94,7 @@ footer ul li a:hover{color:var(--yellow)}
     <li><a href="#locations">Locations</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About Us</a></li>
-    <li><a href="#locations" class="nav-cta">Book Appointment</a></li>
+    <li><a href="#" class="nav-cta autoops-book">Book Appointment</a></li>
   </ul>
 </nav>
 
@@ -125,7 +125,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 7:00am – 6:00pm &nbsp;|&nbsp; Sat: 8:00am – 4:00pm</div></div>
         <div class="lrow"><div class="dot"></div><div>Full-service gas &amp; complete auto repair</div></div>
         <div class="lacts">
-          <a class="bbk" href="#" class="autoops-book" target="_blank">Book Appointment ›</a>
+          <a class="bbk autoops-book" href="#" target="_blank">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168233004">&#128222; (716) 823-3004</a>
         </div>
       </div>
@@ -139,7 +139,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 7:00am – 6:00pm &nbsp;|&nbsp; Sat: 8:00am – 4:00pm</div></div>
         <div class="lrow"><div class="dot"></div><div>Full-service gas &amp; complete auto repair</div></div>
         <div class="lacts">
-          <a class="bbk" href="#" class="autoops-book" target="_blank">Book Appointment ›</a>
+          <a class="bbk autoops-book" href="#" target="_blank">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168233004">&#128222; (716) 823-3004</a>
         </div>
       </div>
@@ -180,8 +180,8 @@ footer ul li a:hover{color:var(--yellow)}
   <h2>Ready to Book? Skip the Phone Call.</h2>
   <p>Choose your location and schedule online — fast, easy, no waiting on hold.</p>
   <div class="cbts">
-    <a class="bn" href="#locations">Book at West Seneca</a>
-    <a class="bn2" href="#locations">Book at Buffalo East</a>
+    <a class="bn autoops-book" href="#">Book at West Seneca</a>
+    <a class="bn2 autoops-book" href="#">Book at Buffalo East</a>
   </div>
 </div>
 
@@ -197,7 +197,7 @@ footer ul li a:hover{color:var(--yellow)}
         <li>570 Seneca St, West Seneca NY 14224</li>
         <li>Mon–Fri 7am–6pm &nbsp;·&nbsp; Sat 8am–4pm</li>
         <li><a href="tel:+17168233004">(716) 823-3004</a></li>
-        <li><a href="#" class="autoops-book">Book Online</a></li>
+        <li><a href="#" class="autoops-book" >Book Online</a></li>
       </ul>
     </div>
     <div>
@@ -206,7 +206,7 @@ footer ul li a:hover{color:var(--yellow)}
         <li>65 Center Rd, Buffalo NY 14224</li>
         <li>Mon–Fri 7am–6pm &nbsp;·&nbsp; Sat 8am–4pm</li>
         <li><a href="tel:+17168233004">(716) 823-3004</a></li>
-        <li><a href="#" class="autoops-book">Book Online</a></li>
+        <li><a href="#" class="autoops-book" >Book Online</a></li>
       </ul>
     </div>
     <div>
@@ -226,15 +226,20 @@ footer ul li a:hover{color:var(--yellow)}
 
   <script>
     function attachAOCode() {
-      const apptBtns = document.querySelectorAll("a.autoops-book");
+      const apptBtns = document.querySelectorAll(".autoops-book");
+      console.log("AutoOps: found " + apptBtns.length + " booking buttons");
       for (const apptBtn of apptBtns) {
         apptBtn.addEventListener("click", function(e) {
           e.preventDefault();
-          AutoOps.show();
+          if (typeof AutoOps !== "undefined") {
+            AutoOps.show();
+          } else {
+            console.warn("AutoOps not loaded yet");
+          }
         });
       }
     }
-    // Wait for AutoOps to load then attach
+    // Run after DOM is ready
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", attachAOCode);
     } else {
