@@ -51,6 +51,8 @@ section{padding:52px 24px}
 .lacts{margin-top:14px;display:flex;flex-direction:column;gap:8px}
 .bbk{display:block;text-align:center;background:var(--yellow);color:var(--navy2);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:5px;transition:background .15s}
 .bbk:hover{background:var(--yd)}
+.bbk{display:block;text-align:center;background:var(--yellow);color:var(--navy2);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:13px;border-radius:5px;transition:background .15s}
+.bbk:hover{background:var(--yd)}
 .bcl{display:block;text-align:center;border:2px solid var(--navy);color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:10px;border-radius:5px;background:transparent;transition:background .15s,color .15s}
 .bcl:hover{background:var(--navy);color:#fff}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px;max-width:960px;margin:0 auto}
@@ -125,6 +127,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 8:00am – 5:30pm &nbsp;|&nbsp; Closed Weekends</div></div>
         <div class="lrow"><div class="dot"></div><div>Complete auto repair</div></div>
         <div class="lacts">
+          <a class="bbk" href="#" id="book-main" onclick="event.preventDefault(); loadAndShowAutoOps('8405fed84895421ab14b9fb6fd65f2e7', 'portal-scripts-main'); return false;">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168233004">&#128222; (716) 823-3004</a>
         </div>
       </div>
@@ -138,6 +141,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 8:00am – 5:30pm &nbsp;|&nbsp; Closed Weekends</div></div>
         <div class="lrow"><div class="dot"></div><div>Complete auto repair</div></div>
         <div class="lacts">
+          <a class="bbk" href="#" id="book-east" onclick="event.preventDefault(); loadAndShowAutoOps('9bdd752155224312b913f3c84b6ab025', 'portal-scripts-east'); return false;">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168222277">&#128222; (716) 822-2277</a>
         </div>
       </div>
@@ -210,5 +214,35 @@ footer ul li a:hover{color:var(--yellow)}
   </div>
   <div class="fbot">&copy; 2025 Don &amp; Jim's Auto Service Center &nbsp;&middot;&nbsp; West Seneca, NY &nbsp;&middot;&nbsp; All rights reserved</div>
 </footer>
+  <script>
+    function loadAndShowAutoOps(apiKey, scriptId) {
+      // If this location's script is already loaded, just show
+      if (window[scriptId + '_loaded']) {
+        if (typeof AutoOps !== 'undefined' && typeof AutoOps.show === 'function') {
+          AutoOps.show();
+        }
+        return;
+      }
+      // Remove any existing portal script to avoid conflicts
+      var existing = document.getElementById('portal-scripts');
+      if (existing) existing.remove();
+      // Load the correct script for this location
+      var script = document.createElement('script');
+      script.id = 'portal-scripts';
+      script.setAttribute('data-api-key', apiKey);
+      script.setAttribute('data-google-analytics-enabled', 'true');
+      script.setAttribute('data-loading-color', 'da2c3d');
+      script.src = 'https://portal.autoops.com/portal-scripts.js';
+      script.onload = function() {
+        window[scriptId + '_loaded'] = true;
+        setTimeout(function() {
+          if (typeof AutoOps !== 'undefined' && typeof AutoOps.show === 'function') {
+            AutoOps.show();
+          }
+        }, 300);
+      };
+      document.body.appendChild(script);
+    }
+  </script>
 </body>
 </html>
