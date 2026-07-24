@@ -127,7 +127,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 8:00am – 5:30pm &nbsp;|&nbsp; Closed Weekends</div></div>
         <div class="lrow"><div class="dot"></div><div>Complete auto repair</div></div>
         <div class="lacts">
-          <a class="bbk" href="#" id="book-main" onclick="event.preventDefault(); loadAndShowAutoOps('8405fed84895421ab14b9fb6fd65f2e7', 'portal-scripts-main'); return false;">Book Appointment ›</a>
+          <a class="bbk" href="#" id="book-main" onclick="event.preventDefault(); AutoOps.show(); return false;">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168233004">&#128222; (716) 823-3004</a>
         </div>
       </div>
@@ -141,7 +141,7 @@ footer ul li a:hover{color:var(--yellow)}
         <div class="lrow"><div class="dot"></div><div>Mon–Fri: 8:00am – 5:30pm &nbsp;|&nbsp; Closed Weekends</div></div>
         <div class="lrow"><div class="dot"></div><div>Complete auto repair</div></div>
         <div class="lacts">
-          <a class="bbk" href="#" id="book-east" onclick="event.preventDefault(); loadAndShowAutoOps('9bdd752155224312b913f3c84b6ab025', 'portal-scripts-east'); return false;">Book Appointment ›</a>
+          <a class="bbk" href="#" id="book-east" onclick="event.preventDefault(); AutoOps.show(); return false;">Book Appointment ›</a>
           <a class="bcl" href="tel:+17168222277">&#128222; (716) 822-2277</a>
         </div>
       </div>
@@ -191,7 +191,7 @@ footer ul li a:hover{color:var(--yellow)}
         <li>2570 Seneca St, West Seneca NY 14224</li>
         <li>Mon–Fri 8am–5:30pm &nbsp;·&nbsp; Closed Weekends</li>
         <li><a href="tel:+17168233004">(716) 823-3004</a></li>
-        <li><a href="#" onclick="event.preventDefault(); loadAndShowAutoOps('8405fed84895421ab14b9fb6fd65f2e7', 'portal-scripts-main'); return false;">Book Appointment</a></li>
+        <li><a href="#" onclick="event.preventDefault(); AutoOps.show(); return false;">Book Appointment</a></li>
       </ul>
     </div>
     <div>
@@ -200,7 +200,7 @@ footer ul li a:hover{color:var(--yellow)}
         <li>65 Center Rd, West Seneca NY 14224</li>
         <li>Mon–Fri 8am–5:30pm &nbsp;·&nbsp; Closed Weekends</li>
         <li><a href="tel:+17168222277">(716) 822-2277</a></li>
-        <li><a href="#" onclick="event.preventDefault(); loadAndShowAutoOps('9bdd752155224312b913f3c84b6ab025', 'portal-scripts-east'); return false;">Book Appointment</a></li>
+        <li><a href="#" onclick="event.preventDefault(); AutoOps.show(); return false;">Book Appointment</a></li>
       </ul>
     </div>
     <div>
@@ -216,35 +216,6 @@ footer ul li a:hover{color:var(--yellow)}
   </div>
   <div class="fbot">&copy; 2025 Don &amp; Jim's Auto Service Center &nbsp;&middot;&nbsp; West Seneca, NY &nbsp;&middot;&nbsp; All rights reserved</div>
 </footer>
-  <script>
-    function loadAndShowAutoOps(apiKey, scriptId) {
-      // If this location's script is already loaded, just show
-      if (window[scriptId + '_loaded']) {
-        if (typeof AutoOps !== 'undefined' && typeof AutoOps.show === 'function') {
-          AutoOps.show();
-        }
-        return;
-      }
-      // Remove any existing portal script to avoid conflicts
-      var existing = document.getElementById('portal-scripts');
-      if (existing) existing.remove();
-      // Load the correct script for this location
-      var script = document.createElement('script');
-      script.id = 'portal-scripts';
-      script.setAttribute('data-api-key', apiKey);
-      script.setAttribute('data-google-analytics-enabled', 'true');
-      script.setAttribute('data-loading-color', 'da2c3d');
-      script.src = 'https://portal.autoops.com/portal-scripts.js';
-      script.onload = function() {
-        window[scriptId + '_loaded'] = true;
-        setTimeout(function() {
-          if (typeof AutoOps !== 'undefined' && typeof AutoOps.show === 'function') {
-            AutoOps.show();
-          }
-        }, 300);
-      };
-      document.body.appendChild(script);
-    }
-  </script>
+  <script id="portal-scripts" data-google-analytics-enabled="true" data-api-key="key_cl_grp_6dd9d58c5d9547ba82eeeab47acf0204" src="https://portal.autoops.com/portal-scripts.js"></script>
 </body>
 </html>
